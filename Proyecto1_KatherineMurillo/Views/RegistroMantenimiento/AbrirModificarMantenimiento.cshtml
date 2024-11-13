@@ -1,0 +1,100 @@
+﻿@model Proyecto1_KatherineMurillo.Models.cls_Mantenimiento
+
+@{
+    ViewData["Title"] = "AbrirModificarMantenimiento";
+}
+
+<h4>Modifique el Mantenimiento: </h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateMantenimiento" asp-controller="RegistroMantenimiento" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">ID del mantenimiento:</label>
+                <input asp-for="idMantenimiento" class="form-control" readonly />
+                <span asp-validation-for="idMantenimiento" class="text-danger"></span>               
+            </div>
+            <div class="form-group">
+                <label class="control-label">ID del Cliente:</label>
+                <input asp-for="idCliente" id="idClienteInput" class="form-control" readonly />
+                <span asp-validation-for="idCliente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Seleccione la fecha de ejecutado:</label>
+                <input asp-for="fechaEjecutado" type="date" id="fechaEjecucion" class="form-control" />
+                <span asp-validation-for="fechaEjecutado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Seleccione la fecha de agendado:</label>
+                <input asp-for="fechaAgendado" type="date" class="form-control" />
+                <span asp-validation-for="fechaAgendado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Digite los metros de propiedad:</label>
+                <input asp-for="metrosPropiedad" class="form-control" id="MetrosPropiedad" inputmode="decimal" />
+                <span asp-validation-for="metrosPropiedad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Digite los metros de cerca viva:</label>
+                <input asp-for="metrosCercaViva" class="form-control" id="MetrosCercaViva" inputmode="decimal" />
+                <span asp-validation-for="metrosCercaViva" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Cantidad días sin chapia:</label>
+                <button onmousemove="mostrarDiasSinChapia()" class="btn-info fw-bold" disabled>calcular días</button>
+                <input asp-for="diasSinChapia" type="text" readonly="readonly" id="resultado" class="form-control" />
+                <span asp-validation-for="diasSinChapia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Fecha de la próxima chapia: <span id="manten"></span></label>
+                <button onmousemove="mostrarProximaChapia()" class="btn-info fw-bold" disabled>calcular siguiente chapia</button>
+                <input asp-for="fechaOtraChapia" type="text" id="result" readonly="readonly" class="form-control" />
+                <span asp-validation-for="fechaOtraChapia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Seleccione el tipo de zacate:</label>
+                <select asp-for="tipoZacate" class="form-control" asp-items="@(new SelectList(new[] { "San Agustín", "Toro", "Dulce", "Otro" }))"></select>
+                <span asp-validation-for="tipoZacate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Seleccione si se le ha aplicado algún producto:</label>
+                <select asp-for="aplicacionProducto" class="form-control" asp-items="@(new SelectList(new[] { "Sí", "No" }))"></select>
+                <span asp-validation-for="aplicacionProducto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Seleccione el producto aplicado:</label>
+                <select asp-for="productoAplicado" class="form-control" asp-items="@(new SelectList(new[] { "Random", "Coyolillo", "Hoja Ancha", "Otro" }))"></select>
+                <span asp-validation-for="productoAplicado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Costo de la chapia:</label>
+                <input asp-for="costoChapia" class="form-control" />
+                <span asp-validation-for="costoChapia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Costo de la aplicación del producto:</label>
+                <input asp-for="costoAplicacionProducto" class="form-control" />
+                <span asp-validation-for="costoAplicacionProducto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Seleccione el estado del mantenimiento:</label>
+                <select asp-for="estadoMantenimiento" class="form-control" asp-items="@(new SelectList(new[] { "En proceso", "Facturado", "Agendado" }))"></select>
+                <span asp-validation-for="estadoMantenimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ListadoMantenimiento" asp-controller="RegistroMantenimiento">Regresar al Listado</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+}

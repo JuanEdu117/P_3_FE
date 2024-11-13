@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Proyecto1_KatherineMurillo.Models.cls_Empleados>
+
+@{
+    ViewData["Title"] = "FiltrarEmpleado";
+}
+
+<h1>Filtrar Empleados</h1>
+
+<table class="table table-hover">
+    <thead class="table-info">
+        <tr>
+            <th>
+                Cédula
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Fecha Nacimiento
+            </th>
+            <th>
+                Lateralidad
+            </th>
+            <th>
+                Fecha Ingreso
+            </th>
+            <th>
+                Salario Hora
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.iCedula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sNombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dtmFechaNacimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sLateralidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dtmFechaIngreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fSalarioHora)
+            </td>                  
+        </tr>
+}
+    </tbody>
+</table>
+<div> <a asp-action="ListadoEmpleados" asp-controller="RegistroEmpleados">Regresar al Listado</a>
+    </div>

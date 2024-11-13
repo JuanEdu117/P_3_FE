@@ -1,0 +1,59 @@
+﻿@model Proyecto1_KatherineMurillo.Models.cls_Inventario
+
+@{
+    ViewData["Title"] = "AbrirModificarInventario";
+}
+
+<h4>Modifique el Inventario: </h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateInventario" asp-controller="RegistroInventario" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Cédula:</label>
+                <input asp-for="idInventario" class="form-control" readonly />
+                <span asp-validation-for="idInventario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Digite la descripción:</label>
+                <input asp-for="descripcion" class="form-control" id="descripcion" required />
+                <span asp-validation-for="descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Seleccione el tipo de máquina:</label>
+                <select asp-for="tipoMaquina" class="form-control" asp-items="@(new SelectList(new[] { "Shindaiwa",
+                "Corta setos", "Motosierra", "Rastrillo", "Carretillo", "Otro" }))"></select>
+                <span asp-validation-for="tipoMaquina" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Digite las horas de uso actuales:</label>
+                <input asp-for="horasActuales" class="form-control" id="HorasActuales" inputmode="decimal" />
+                <span asp-validation-for="horasActuales" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Digite las horas de uso máximas:</label>
+                <input asp-for="horasMaximas" class="form-control" id="HorasMaximas" inputmode="decimal" />
+                <span asp-validation-for="horasMaximas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Digite las horas de uso para dar mantenimiento:</label>
+                <input asp-for="horasMantenimiento" class="form-control" id="HorasMantenimiento" inputmode="decimal" />
+                <span asp-validation-for="horasMantenimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ListadoInventario" asp-controller="RegistroInventario">Regresar al Listado</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/validacionesinventario.js"></script>
+}

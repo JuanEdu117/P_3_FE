@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Proyecto1_KatherineMurillo.Models.cls_Inventario>
+
+@{
+    ViewData["Title"] = "FiltrarInventario";
+}
+
+<h1>Filtrar Inventario</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idInventario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipoMaquina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.horasActuales)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.horasMaximas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.horasMantenimiento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idInventario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipoMaquina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.horasActuales)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.horasMaximas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.horasMantenimiento)
+            </td>           
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a asp-action="ListadoInventario" asp-controller="RegistroInventario">Regresar al Listado</a>
+</div>

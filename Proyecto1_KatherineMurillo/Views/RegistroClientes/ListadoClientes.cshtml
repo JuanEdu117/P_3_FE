@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Proyecto1_KatherineMurillo.Models.cls_Clientes>
+
+@{
+    ViewData["Title"] = "ListadoClientes";
+}
+
+<h1>Listado Clientes</h1>
+
+<p>
+    <a asp-action="AbrirCrearClientes" asp-controller="RegistroClientes">Crear Nuevo</a>
+</p>
+
+<form asp-action="FiltrarClientes" asp-controller="RegistroClientes" method="get">
+    @* ASOCIO LA ACCION DEL CONTROLLLER ASP-ACTION Y LE ASIGNO EL CONTROLLER ASP-CONTROLLER *@
+    <div>
+        <label>Buscar Clientes: </label>
+        <input name="_sIdBuscar" id="estado" type="search" required /> @*EL NAME COINCIDE CON EL VALOR DEL STRING QUE RECIBE*@
+        <span id="estadoFeedback" style="color: red;"></span>
+        <button type="submit" class="button btn-outline-primary font-weight-bold"> <span class="spinner-border spinner-border-sm"></span>Filtrar</button>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Identificación
+            </th>
+            <th>
+                Nombre Completo
+            </th>
+            <th>
+                Provincia
+            </th>
+            <th>
+                Cantón
+            </th>
+            <th>
+                Distrito
+            </th>
+            <th>
+                Dirección Exacta
+            </th>
+            <th>
+                Mantenimiento Invierno
+            </th>
+            <th>
+                Mantenimiento Verano
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.identificacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.provincia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.canton)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.distrito)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.direccionExacta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mantenimientoInvierno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mantenimientoVerano)
+            </td>
+            <td>
+                    @Html.ActionLink("Modificar", "AbrirModificarClientes", new { _iId_Clientes = item.identificacion }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Eliminar", "AbrirEliminarClientes", new { _iId_Clientes = item.identificacion }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

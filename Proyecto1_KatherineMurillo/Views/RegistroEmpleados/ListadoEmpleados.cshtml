@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Proyecto1_KatherineMurillo.Models.cls_Empleados>
+
+@{
+    ViewData["Title"] = "ListadoEmpleados";
+}
+
+<h1>Listado Empleados</h1>
+
+<p>
+    <a asp-action="AbrirCrearEmpleado" asp-controller="RegistroEmpleados">Crear Nuevo</a>
+</p>
+
+<form asp-action="FiltrarEmpleado" asp-controller="RegistroEmpleados" method="get">
+    @* ASOCIO LA ACCION DEL CONTROLLLER ASP-ACTION Y LE ASIGNO EL CONTROLLER ASP-CONTROLLER *@
+    <div>
+        <label>Buscar Empleado: </label>
+        <input name="_sIdBuscar" id="estado" type="search" required/> @*EL NAME COINCIDE CON EL VALOR DEL STRING QUE RECIBE*@
+        <span id="estadoFeedback" style="color: red;"></span>
+        <button type="submit" class="button btn-outline-primary font-weight-bold"> <span class="spinner-border spinner-border-sm"></span>Filtrar</button>
+    </div>
+</form>
+
+<hr />
+<table class="table table-hover">
+    <thead class="table-success">
+        <tr>
+            <th>
+                Cédula
+            </th>
+            <th>
+                Nombre Completo
+            </th>
+            <th>
+                Fecha Nacimiento
+            </th>
+            <th>
+                Lateralidad
+            </th>
+            <th>
+                Fecha Ingreso
+            </th>
+            <th>
+                Salario Hora
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.iCedula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sNombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dtmFechaNacimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sLateralidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dtmFechaIngreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fSalarioHora)
+            </td>
+            <td>
+                    @Html.ActionLink("Modificar", "AbrirModificarEmpleado", new { _iId_Empleado = item.iCedula }, new {@class = "btn btn-warning"}) |
+                    @Html.ActionLink("Eliminar", "AbrirEliminarEmpleado", new { _iId_Empleado = item.iCedula }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

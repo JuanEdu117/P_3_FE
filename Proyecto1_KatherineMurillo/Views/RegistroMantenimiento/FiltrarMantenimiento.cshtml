@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Proyecto1_KatherineMurillo.Models.cls_Mantenimiento>
+
+@{
+    ViewData["Title"] = "FiltrarMantenimiento";
+}
+
+<h1>Filtrar Mantenimiento</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idMantenimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idCliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaEjecutado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaAgendado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.metrosPropiedad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.metrosCercaViva)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.diasSinChapia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaOtraChapia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipoZacate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.aplicacionProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productoAplicado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.costoChapia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.costoAplicacionProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estadoMantenimiento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idMantenimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaEjecutado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaAgendado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.metrosPropiedad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.metrosCercaViva)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.diasSinChapia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaOtraChapia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipoZacate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aplicacionProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productoAplicado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.costoChapia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.costoAplicacionProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estadoMantenimiento)
+            </td>           
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a asp-action="ListadoMantenimiento" asp-controller="RegistroMantenimiento">Regresar al Listado</a>
+</div>

@@ -1,0 +1,76 @@
+﻿@model Proyecto1_KatherineMurillo.Models.cls_Clientes
+
+@{
+    ViewData["Title"] = "AbrirModificarClientes";
+}
+
+<h4>Modifique el Cliente: </h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateClientes" asp-controller="RegistroClientes" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Identificación:</label>
+                <input asp-for="identificacion" class="form-control" readonly />
+                <span asp-validation-for="identificacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Digite el nombre completo:</label>
+                <input asp-for="nombreCompleto" class="form-control" id="nombreCompleto" required />
+                <span asp-validation-for="nombreCompleto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Seleccione la provincia:</label>
+                <select asp-for="provincia" class="form-control" id="provincia">
+                    <option value="San José" selected>San José</option>
+                    <option value="Alajuela">Alajuela</option>
+                    <option value="Cartago">Cartago</option>
+                    <option value="Heredia">Heredia</option>
+                    <option value="Guanacaste">Guanacaste</option>
+                    <option value="Puntarenas">Puntarenas</option>
+                    <option value="Limón">Limón</option>
+                </select>               
+                <span asp-validation-for="provincia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Seleccione el cantón:</label>
+                <select asp-for="canton" class="form-control" id="canton"></select>
+                <span asp-validation-for="canton" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Seleccione el distrito:</label>
+                <select asp-for="distrito" class="form-control" id="distrito"></select>
+                <span asp-validation-for="distrito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Digite la dirección exacta:</label>
+                <input asp-for="direccionExacta" class="form-control" />
+                <span asp-validation-for="direccionExacta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Seleccione el mantenimiento en invierno:</label>
+                <select asp-for="mantenimientoInvierno" class="form-control" asp-items="@(new SelectList(new[] { 15, 30 }))"></select>
+                <span asp-validation-for="mantenimientoInvierno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Seleccione el mantenimiento en verano:</label>
+                <select asp-for="mantenimientoVerano" class="form-control" asp-items="@(new SelectList(new[] { 15, 30 }))"></select>
+                <span asp-validation-for="mantenimientoVerano" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ListadoClientes" asp-controller="RegistroClientes">Regresar al Listado</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/validacionesclientes.js"></script>
+}

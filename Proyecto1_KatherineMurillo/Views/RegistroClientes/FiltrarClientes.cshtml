@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Proyecto1_KatherineMurillo.Models.cls_Clientes>
+
+@{
+    ViewData["Title"] = "FiltrarClientes";
+}
+
+<h1>Filtrar Clientes</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.identificacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombreCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.provincia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.canton)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.distrito)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.direccionExacta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mantenimientoInvierno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mantenimientoVerano)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.identificacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.provincia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.canton)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.distrito)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.direccionExacta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mantenimientoInvierno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mantenimientoVerano)
+            </td>            
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a asp-action="ListadoClientes" asp-controller="RegistroClientes">Regresar al Listado</a>
+</div>

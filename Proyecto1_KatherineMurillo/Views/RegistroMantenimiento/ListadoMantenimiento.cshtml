@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Proyecto1_KatherineMurillo.Models.cls_Mantenimiento>
+
+@{
+    ViewData["Title"] = "ListadoMantenimiento";
+}
+
+<h1>Listado Mantenimiento</h1>
+
+<p>
+    <a asp-action="AbrirCrearMantenimiento" asp-controller="RegistroMantenimiento">Crear Nuevo</a>
+</p>
+
+<form asp-action="FiltrarMantenimiento" asp-controller="RegistroMantenimiento" method="get">
+    @* ASOCIO LA ACCION DEL CONTROLLLER ASP-ACTION Y LE ASIGNO EL CONTROLLER ASP-CONTROLLER *@
+    <div>
+        <label>Buscar Mantenimiento: </label>
+        <input name="_sIdBuscar" id="estado" type="search" required /> @*EL NAME COINCIDE CON EL VALOR DEL STRING QUE RECIBE*@
+        <span id="estadoFeedback" style="color: red;"></span>
+        <button type="submit" class="button btn-outline-primary font-weight-bold"> <span class="spinner-border spinner-border-sm"></span>Filtrar</button>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID Mantenimiento
+            </th>
+            <th>
+                ID Cliente
+            </th>
+            <th>
+                Fecha Ejecutado
+            </th>
+            <th>
+                Fecha Agendado
+            </th>
+            <th>
+                Metros Propiedad
+            </th>
+            <th>
+                Metros Cerca Viva
+            </th>
+            <th>
+                Dias Sin Chapia
+            </th>
+            <th>
+                Fecha Otra Chapia
+            </th>
+            <th>
+                Tipo Zacate
+            </th>
+            <th>
+                Aplicación Producto
+            </th>
+            <th>
+                Producto Aplicado
+            </th>
+            <th>
+                Costo Chapia
+            </th>
+            <th>
+                Costo Aplicación Producto
+            </th>
+            <th>
+                Estado Mantenimiento
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idMantenimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaEjecutado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaAgendado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.metrosPropiedad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.metrosCercaViva)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.diasSinChapia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaOtraChapia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipoZacate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aplicacionProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productoAplicado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.costoChapia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.costoAplicacionProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estadoMantenimiento)
+            </td>
+            <td>
+                    @Html.ActionLink("Modificar", "AbrirModificarMantenimiento", new { _iId_Mantenimiento = item.idMantenimiento }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Eliminar", "AbrirEliminarMantenimiento", new { _iId_Mantenimiento = item.idMantenimiento }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
