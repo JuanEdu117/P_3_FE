@@ -28,6 +28,72 @@ namespace Proyecto1_KatherineMurillo.Controllers
 
         #region MÉTODOS
 
+        #region INVENT
+        public async Task<List<cls_Inventario>> ListarInvent()
+        {
+            List<cls_Inventario> Obj_lstResultado = new List<cls_Inventario>();
+            string _sRutaAPI = @"api/Inventario/ConsultaInvent";               //VA A CONCATENAR A LA RUTA BASE
+            HttpResponseMessage resultadosonsumo = await hcCNXApi.GetAsync(_sRutaAPI);
+            if (resultadosonsumo.IsSuccessStatusCode)
+            {
+                string jsonstring = await resultadosonsumo.Content.ReadAsStringAsync();
+                Obj_lstResultado = JsonSerializer.Deserialize<List<cls_Inventario>>(jsonstring);
+            }
+            return Obj_lstResultado;
+        }
+        public async Task<bool> AlmacenarInvent(cls_Inventario Obj_Entidad)
+        {
+            string _sRutaAPI = @"api/Inventario/AlmacenaInvent";
+            HttpResponseMessage resultadoconsumo = await hcCNXApi.PostAsJsonAsync(_sRutaAPI, Obj_Entidad);
+            return resultadoconsumo.IsSuccessStatusCode;
+        }
+        public async Task<bool> EliminarInvent(cls_Inventario Obj_Entidad)
+        {
+            string _sRutaAPI = @"api/Inventario/EliminaInvent";
+            hcCNXApi.DefaultRequestHeaders.Add("_iInventId", Obj_Entidad.idInventario.ToString());
+            HttpResponseMessage resultadoconsumo = await hcCNXApi.DeleteAsync(_sRutaAPI);
+            return resultadoconsumo.IsSuccessStatusCode;
+        }
+        
+        #endregion
+
+        #region CLIENT
+        public async Task<List<cls_Clientes>> ListarClient()
+        {
+            List<cls_Clientes> Obj_lstResultado = new List<cls_Clientes>();
+            string _sRutaAPI = @"api/Clientes/ConsultaClient";               //VA A CONCATENAR A LA RUTA BASE
+            HttpResponseMessage resultadosonsumo = await hcCNXApi.GetAsync(_sRutaAPI);
+            if (resultadosonsumo.IsSuccessStatusCode)
+            {
+                string jsonstring = await resultadosonsumo.Content.ReadAsStringAsync();
+                Obj_lstResultado = JsonSerializer.Deserialize<List<cls_Clientes>>(jsonstring);
+            }
+            return Obj_lstResultado;
+        }
+        public async Task<bool> AlmacenarClient(cls_Clientes Obj_Entidad)
+        {
+            string _sRutaAPI = @"api/Clientes/AlmacenaClient";
+            HttpResponseMessage resultadoconsumo = await hcCNXApi.PostAsJsonAsync(_sRutaAPI, Obj_Entidad);
+            return resultadoconsumo.IsSuccessStatusCode;
+        }
+        public async Task<bool> EliminarClient(cls_Clientes Obj_Entidad)
+        {
+            string _sRutaAPI = @"api/Clientes/EliminaClient";
+            hcCNXApi.DefaultRequestHeaders.Add("_iIdentify", Obj_Entidad.identificacion.ToString());
+            HttpResponseMessage resultadoconsumo = await hcCNXApi.DeleteAsync(_sRutaAPI);
+            return resultadoconsumo.IsSuccessStatusCode;
+        }
+        
+        #endregion
+
+        #region MAINTENANCE
+
+        #endregion
+
+        #region REPORT
+
+        #endregion
+
         #region EMPLEADOS
         //Método para listar empleados
         public async Task<List<cls_Empleados>> ListarEmpleados()
@@ -261,9 +327,7 @@ namespace Proyecto1_KatherineMurillo.Controllers
         }
         #endregion
 
-        #region REPORTES
-
-        #endregion
+        
         #endregion
     }
 }
