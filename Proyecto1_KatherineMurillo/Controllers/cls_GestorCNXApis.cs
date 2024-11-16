@@ -83,15 +83,62 @@ namespace Proyecto1_KatherineMurillo.Controllers
             HttpResponseMessage resultadoconsumo = await hcCNXApi.DeleteAsync(_sRutaAPI);
             return resultadoconsumo.IsSuccessStatusCode;
         }
-        
         #endregion
 
         #region MAINTENANCE
-
+        public async Task<List<cls_Mantenimiento>> ListarMaintenance()
+        {
+            List<cls_Mantenimiento> Obj_lstResultado = new List<cls_Mantenimiento>();
+            string _sRutaAPI = @"api/Mantenimiento/ConsultaMaintenance";               //VA A CONCATENAR A LA RUTA BASE
+            HttpResponseMessage resultadosonsumo = await hcCNXApi.GetAsync(_sRutaAPI);
+            if (resultadosonsumo.IsSuccessStatusCode)
+            {
+                string jsonstring = await resultadosonsumo.Content.ReadAsStringAsync();
+                Obj_lstResultado = JsonSerializer.Deserialize<List<cls_Mantenimiento>>(jsonstring);
+            }
+            return Obj_lstResultado;
+        }
+        public async Task<bool> AlmacenarMaintenance(cls_Mantenimiento Obj_Entidad)
+        {
+            string _sRutaAPI = @"api/Mantenimiento/AlmacenaMaintenance";
+            HttpResponseMessage resultadoconsumo = await hcCNXApi.PostAsJsonAsync(_sRutaAPI, Obj_Entidad);
+            return resultadoconsumo.IsSuccessStatusCode;
+        }
+        public async Task<bool> EliminarMaintenance(cls_Mantenimiento Obj_Entidad)
+        {
+            string _sRutaAPI = @"api/Mantenimiento/EliminaMaintenance";
+            hcCNXApi.DefaultRequestHeaders.Add("_iIdMante", Obj_Entidad.idMantenimiento.ToString());
+            HttpResponseMessage resultadoconsumo = await hcCNXApi.DeleteAsync(_sRutaAPI);
+            return resultadoconsumo.IsSuccessStatusCode;
+        }
         #endregion
 
         #region REPORT
-
+        public async Task<List<cls_Reportes>> ListarReport()
+        {
+            List<cls_Reportes> Obj_lstResultado = new List<cls_Reportes>();
+            string _sRutaAPI = @"api/Reportes/ConsultaReport";               //VA A CONCATENAR A LA RUTA BASE
+            HttpResponseMessage resultadosonsumo = await hcCNXApi.GetAsync(_sRutaAPI);
+            if (resultadosonsumo.IsSuccessStatusCode)
+            {
+                string jsonstring = await resultadosonsumo.Content.ReadAsStringAsync();
+                Obj_lstResultado = JsonSerializer.Deserialize<List<cls_Reportes>>(jsonstring);
+            }
+            return Obj_lstResultado;
+        }
+        public async Task<bool> AlmacenarReport(cls_Reportes Obj_Entidad)
+        {
+            string _sRutaAPI = @"api/Reportes/AlmacenaReport";
+            HttpResponseMessage resultadoconsumo = await hcCNXApi.PostAsJsonAsync(_sRutaAPI, Obj_Entidad);
+            return resultadoconsumo.IsSuccessStatusCode;
+        }
+        public async Task<bool> EliminarReport(cls_Reportes Obj_Entidad)
+        {
+            string _sRutaAPI = @"api/Reportes/EliminaReport";
+            hcCNXApi.DefaultRequestHeaders.Add("_iIdReporte", Obj_Entidad.id_Reporte.ToString());
+            HttpResponseMessage resultadoconsumo = await hcCNXApi.DeleteAsync(_sRutaAPI);
+            return resultadoconsumo.IsSuccessStatusCode;
+        }
         #endregion
 
         #region EMPLEADOS
@@ -326,8 +373,6 @@ namespace Proyecto1_KatherineMurillo.Controllers
             return resultadoconsumo.IsSuccessStatusCode;
         }
         #endregion
-
-        
         #endregion
     }
 }
