@@ -141,7 +141,7 @@ namespace Proyecto1_KatherineMurillo.Controllers
         }
         #endregion
 
-        /*#region EMPLEADOS
+        #region EMPLEADOS
         //Método para listar empleados
         public async Task<List<cls_Empleados>> ListarEmpleados()
         {
@@ -372,7 +372,7 @@ namespace Proyecto1_KatherineMurillo.Controllers
             HttpResponseMessage resultadoconsumo = await hcCNXApi.DeleteAsync(_sRutaAPI); //Realiza una solicitud a la API
             return resultadoconsumo.IsSuccessStatusCode;
         }
-        #endregion*/
+        #endregion
         #endregion
     }
 }
