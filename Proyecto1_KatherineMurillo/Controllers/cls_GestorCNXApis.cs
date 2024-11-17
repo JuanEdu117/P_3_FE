@@ -29,6 +29,7 @@ namespace Proyecto1_KatherineMurillo.Controllers
         #region MÉTODOS
 
         #region EMPLOYEE
+
         public async Task<List<cls_Empleados>> ListarEmployee()
         {
             List<cls_Empleados> Obj_lstResultado = new List<cls_Empleados>();
@@ -54,6 +55,9 @@ namespace Proyecto1_KatherineMurillo.Controllers
             HttpResponseMessage resultadoconsumo = await hcCNXApi.DeleteAsync(_sRutaAPI);
             return resultadoconsumo.IsSuccessStatusCode;
         }
+
+
+
         #endregion
 
         #region INVENT

@@ -52,8 +52,41 @@ namespace Proyecto1_KatherineMurillo.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertMantenimiento(cls_Mantenimiento P_Entidad) //Método para insertar 
         {
-            cls_GestorCNXApis Obj_Gestor = new cls_GestorCNXApis(); //INSTANCIO OBJ DE LA CLASE GESTORCONEX
-            await Obj_Gestor.AlmacenarMaintenance(P_Entidad);
+            cls_GestorCNXApis Obj_GestorCNX = new cls_GestorCNXApis(); //INSTANCIO OBJ DE LA CLASE GESTORCONEX
+            await Obj_GestorCNX.AlmacenarMaintenance(P_Entidad);
+
+            DateTime hoy = DateTime.Today;
+            DateTime ultimaFecha = P_Entidad.fechaEjecutado;
+
+            if (ultimaFecha <= hoy.AddDays(7))
+            {
+                await Obj_GestorCNX.AlmacenarReport(new cls_Reportes
+                {
+                   
+                    id_Cliente = P_Entidad.idCliente,
+                    id_Mantenimiento = P_Entidad.idMantenimiento,
+                    //nombre_Cliente = P_Entidad.idCliente.ToString(),
+                    fecha_Ultimo_Servicio = P_Entidad.fechaEjecutado,
+                    proxima_Fecha_Contacto = Convert.ToDateTime(P_Entidad.fechaOtraChapia),
+                    fecha_Reporte = DateTime.Now,
+                    motivo = "Contactar para mantenimiento"
+                });
+            }
+            else if (ultimaFecha > hoy.AddDays(60))
+            {
+                await Obj_GestorCNX.AlmacenarReport(new cls_Reportes
+                {
+                    id_Cliente = P_Entidad.idCliente,
+                    id_Mantenimiento = P_Entidad.idMantenimiento,
+                    //nombre_Cliente = P_Entidad.idCliente.ToString(),
+                    fecha_Ultimo_Servicio = P_Entidad.fechaEjecutado,
+                    proxima_Fecha_Contacto = Convert.ToDateTime(P_Entidad.fechaOtraChapia),
+                    fecha_Reporte = DateTime.Now,
+                    motivo = "No ha agendado en más de dos meses"
+                });
+            }
+
+            
             return RedirectToAction("ListadoMantenimiento", "RegistroMantenimiento");
         }
 

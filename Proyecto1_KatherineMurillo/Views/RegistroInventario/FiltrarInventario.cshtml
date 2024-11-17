@@ -6,33 +6,33 @@
 
 <h1>Filtrar Inventario</h1>
 
-<table class="table">
-    <thead>
+<table class="table table-hover">
+    <thead class="table-info">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.idInventario)
+                ID Inventario
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.descripcion)
+                Descripción
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.tipoMaquina)
+                Tipo Máquina
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.horasActuales)
+                Horas Actuales
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.horasMaximas)
+                Horas Máximas
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.horasMantenimiento)
+                Horas Mantenimiento
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+            <tr style="background-color: rgba(255, 255, 255, 0.9);">
             <td>
                 @Html.DisplayFor(modelItem => item.idInventario)
             </td>
