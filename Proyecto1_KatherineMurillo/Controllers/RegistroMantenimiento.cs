@@ -62,6 +62,7 @@ namespace Proyecto1_KatherineMurillo.Controllers
             {
                 await Obj_GestorCNX.AlmacenarReport(new cls_Reportes
                 {
+                   
                     id_Cliente = P_Entidad.idCliente,
                     id_Mantenimiento = P_Entidad.idMantenimiento,
                     //nombre_Cliente = P_Entidad.idCliente.ToString(),
