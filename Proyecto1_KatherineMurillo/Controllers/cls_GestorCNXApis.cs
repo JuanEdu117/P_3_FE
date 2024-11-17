@@ -30,6 +30,34 @@ namespace Proyecto1_KatherineMurillo.Controllers
 
         #region EMPLOYEE
 
+        public async Task<List<cls_Empleados>> ListarEmployee()
+        {
+            List<cls_Empleados> Obj_lstResultado = new List<cls_Empleados>();
+            string _sRutaAPI = @"api/Empleados/ConsultaEmployee";               //VA A CONCATENAR A LA RUTA BASE
+            HttpResponseMessage resultadosonsumo = await hcCNXApi.GetAsync(_sRutaAPI);
+            if (resultadosonsumo.IsSuccessStatusCode)
+            {
+                string jsonstring = await resultadosonsumo.Content.ReadAsStringAsync();
+                Obj_lstResultado = JsonSerializer.Deserialize<List<cls_Empleados>>(jsonstring);
+            }
+            return Obj_lstResultado;
+        }
+        public async Task<bool> AlmacenarEmployee(cls_Empleados Obj_Entidad)
+        {
+            string _sRutaAPI = @"api/Empleados/ConsultaEmployee";
+            HttpResponseMessage resultadoconsumo = await hcCNXApi.PostAsJsonAsync(_sRutaAPI, Obj_Entidad);
+            return resultadoconsumo.IsSuccessStatusCode;
+        }
+        public async Task<bool> EliminarEmployee(cls_Empleados Obj_Entidad)
+        {
+            string _sRutaAPI = @"api/Empleados/ConsultaEmployee";
+            hcCNXApi.DefaultRequestHeaders.Add("_iCedula", Obj_Entidad.iCedula.ToString());
+            HttpResponseMessage resultadoconsumo = await hcCNXApi.DeleteAsync(_sRutaAPI);
+            return resultadoconsumo.IsSuccessStatusCode;
+        }
+
+
+
         #endregion
 
         #region INVENT
@@ -145,7 +173,7 @@ namespace Proyecto1_KatherineMurillo.Controllers
         }
         #endregion
 
-        #region EMPLEADOS
+        /*#region EMPLEADOS
         //Método para listar empleados
         public async Task<List<cls_Empleados>> ListarEmpleados()
         {
@@ -376,7 +404,7 @@ namespace Proyecto1_KatherineMurillo.Controllers
             HttpResponseMessage resultadoconsumo = await hcCNXApi.DeleteAsync(_sRutaAPI); //Realiza una solicitud a la API
             return resultadoconsumo.IsSuccessStatusCode;
         }
-        #endregion
+        #endregion*/
         #endregion
     }
 }
