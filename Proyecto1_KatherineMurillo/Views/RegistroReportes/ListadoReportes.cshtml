@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Proyecto1_KatherineMurillo.Models.cls_Reportes>
+
+@{
+    ViewData["Title"] = "ListadoReportes";
+}
+
+<h1>Listado Reportes</h1>
+
+<p>
+    <a asp-action="AbrirCrearReportes" asp-controller="RegistroReportes">Crear Nuevo</a>
+</p>
+
+<form asp-action="FiltrarReportes" asp-controller="RegistroReportes" method="get">
+    @* ASOCIO LA ACCION DEL CONTROLLLER ASP-ACTION Y LE ASIGNO EL CONTROLLER ASP-CONTROLLER *@
+    <div>
+        <label>Buscar Reporte: </label>
+        <input name="_sIdBuscar" id="estado" type="search" required /> @*EL NAME COINCIDE CON EL VALOR DEL STRING QUE RECIBE*@
+        <span id="estadoFeedback" style="color: red;"></span>
+        <button type="submit" class="button btn-outline-primary font-weight-bold"> <span class="spinner-border spinner-border-sm"></span>Filtrar</button>
+    </div>
+</form>
+<hr />
+<table class="table table-hover">
+    <thead class="table-success">
+        <tr>
+            <th>
+                ID Reporte
+            </th>
+            <th>
+                ID Cliente
+            </th>
+            <th>
+                ID Mantenimiento
+            </th>
+            <th>
+                Nombre Cliente
+            </th>
+            <th>
+                Último Servicio
+            </th>
+            <th>
+                Próximo Contacto
+            </th>
+            <th>
+                Fecha Reporte
+            </th>
+            <th>
+                Motivo
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr style="background-color: rgba(255, 255, 255, 0.9);">
+            <td>
+                @Html.DisplayFor(modelItem => item.id_Reporte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_Cliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_Mantenimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre_Cliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_Ultimo_Servicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.proxima_Fecha_Contacto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_Reporte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.motivo)
+            </td>
+                <td class="btn-group">
+                    @Html.ActionLink("Modificar", "AbrirModificarReportes", new { _iId_Reportes = item.id_Mantenimiento }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Eliminar", "AbrirEliminarReportes", new { _iId_Inventario = item.id_Mantenimiento }, new { @class = "btn btn-danger" }) |
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

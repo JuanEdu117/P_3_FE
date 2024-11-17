@@ -7,9 +7,9 @@
         public int id_Cliente { get; set; }
         public int id_Mantenimiento { get; set; }
         public string nombre_Cliente { get; set; }
-        public DateTime fecha_ultimo_servicio { get; set; }
-        public DateTime proxima_fecha_contacto { get; set; }
-        public DateTime fecha_reporte { get; set; }
+        public DateTime fecha_Ultimo_Servicio { get; set; }
+        public DateTime proxima_Fecha_Contacto { get; set; }
+        public DateTime fecha_Reporte { get; set; }
         public string motivo { get; set; }
         public cls_Reportes()
         {
@@ -17,9 +17,9 @@
             id_Cliente = 0;
             id_Mantenimiento = 0;
             nombre_Cliente = string.Empty;
-            fecha_ultimo_servicio = DateTime.MinValue;
-            proxima_fecha_contacto = DateTime.MinValue;
-            fecha_reporte = DateTime.MinValue;
+            fecha_Ultimo_Servicio = DateTime.MinValue;
+            proxima_Fecha_Contacto = DateTime.MinValue;
+            fecha_Reporte = DateTime.MinValue;
             motivo = string.Empty;
         }
         #endregion

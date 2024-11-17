@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Proyecto1_KatherineMurillo.Models.cls_Reportes>
+
+@{
+    ViewData["Title"] = "FiltrarReportes";
+}
+
+<h1>Filtrar Reportes</h1>
+
+<table class="table table-hover">
+    <thead class="table-info">
+        <tr>
+            <th>
+                ID Reporte
+            </th>
+            <th>
+                ID Cliente
+            </th>
+            <th>
+                ID Mantenimiento)
+            </th>
+            <th>
+                Nombre Cliente)
+            </th>
+            <th>
+                Último Servicio
+            </th>
+            <th>
+                Próximo Contacto
+            </th>
+            <th>
+                Fecha Reporte
+            </th>
+            <th>
+                Motivo
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr style="background-color: rgba(255, 255, 255, 0.9);">
+            <td>
+                @Html.DisplayFor(modelItem => item.id_Reporte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_Cliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_Mantenimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre_Cliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_Ultimo_Servicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.proxima_Fecha_Contacto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_Reporte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.motivo)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a asp-action="ListadoReportes" asp-controller="RegistroReportes">Regresar al Listado</a>
+</div>

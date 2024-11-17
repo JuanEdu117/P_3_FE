@@ -28,6 +28,10 @@ namespace Proyecto1_KatherineMurillo.Controllers
 
         #region MÉTODOS
 
+        #region EMPLOYEE
+
+        #endregion
+
         #region INVENT
         public async Task<List<cls_Inventario>> ListarInvent()
         {

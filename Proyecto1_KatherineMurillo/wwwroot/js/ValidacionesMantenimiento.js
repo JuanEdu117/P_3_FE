@@ -96,7 +96,7 @@ function mostrarProximaChapia() {
     //Calcula los días sin chapia
     let proximaChapia = calcularSiguienteChapia(fechaEjecucion, preferencia);
     //Muestra el resultado
-    document.getElementById('result').value = `Fecha próxima chapia: ${proximaChapia}`;
+    document.getElementById('result').value = `${proximaChapia}`;
 }
 //Función para calcular los costos
 function calcularCostos() {
