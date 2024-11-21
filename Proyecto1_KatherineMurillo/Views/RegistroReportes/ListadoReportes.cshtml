@@ -32,9 +32,7 @@
             <th>
                 ID Mantenimiento
             </th>
-            <th>
-                Nombre Cliente
-            </th>
+            
             <th>
                 Último Servicio
             </th>
@@ -59,20 +57,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.id_Cliente)
             </td>
-            <td>
+            <td style="text-align:center">
                 @Html.DisplayFor(modelItem => item.id_Mantenimiento)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre_Cliente)
+            
+            <td >
+                    @item.fecha_Ultimo_Servicio.ToString("dd/MM/yyyy")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.fecha_Ultimo_Servicio)
+                    @item.proxima_Fecha_Contacto.ToString("dd/MM/yyyy")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.proxima_Fecha_Contacto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fecha_Reporte)
+                    @item.fecha_Reporte.ToString("dd/MM/yyyy")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.motivo)

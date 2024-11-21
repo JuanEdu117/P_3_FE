@@ -78,10 +78,10 @@
                 @Html.DisplayFor(modelItem => item.idCliente)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.fechaEjecutado)
+                    @item.fechaEjecutado.ToString("dd/MM/yyyy")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.fechaAgendado)
+                    @item.fechaAgendado.ToString("dd/MM/yyyy")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.metrosPropiedad)
