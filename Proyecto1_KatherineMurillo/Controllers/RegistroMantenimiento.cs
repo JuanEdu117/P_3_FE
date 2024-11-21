@@ -58,27 +58,28 @@ namespace Proyecto1_KatherineMurillo.Controllers
             DateTime hoy = DateTime.Today;
             DateTime ultimaFecha = P_Entidad.fechaEjecutado;
 
-            if (ultimaFecha <= hoy.AddDays(7))
+            // Verificar si la última fecha de mantenimiento es dentro de los próximos 7 días.
+            if (ultimaFecha <= hoy.AddDays(7) && ultimaFecha >= hoy)
             {
+                // Lógica para contactar clientes que deben agendar en la próxima semana.
                 await Obj_GestorCNX.AlmacenarReport(new cls_Reportes
                 {
-                   
                     id_Cliente = P_Entidad.idCliente,
                     id_Mantenimiento = P_Entidad.idMantenimiento,
-                    //nombre_Cliente = P_Entidad.idCliente.ToString(),
                     fecha_Ultimo_Servicio = P_Entidad.fechaEjecutado,
                     proxima_Fecha_Contacto = Convert.ToDateTime(P_Entidad.fechaOtraChapia),
                     fecha_Reporte = DateTime.Now,
                     motivo = "Contactar para mantenimiento"
                 });
             }
-            else if (ultimaFecha > hoy.AddDays(60))
+            // Verificar si no se ha agendado un servicio en más de 60 días.
+            else if (ultimaFecha < hoy.AddDays(-60))
             {
+                // Lógica para clientes que no han agendado en más de dos meses.
                 await Obj_GestorCNX.AlmacenarReport(new cls_Reportes
                 {
                     id_Cliente = P_Entidad.idCliente,
                     id_Mantenimiento = P_Entidad.idMantenimiento,
-                    //nombre_Cliente = P_Entidad.idCliente.ToString(),
                     fecha_Ultimo_Servicio = P_Entidad.fechaEjecutado,
                     proxima_Fecha_Contacto = Convert.ToDateTime(P_Entidad.fechaOtraChapia),
                     fecha_Reporte = DateTime.Now,
@@ -86,7 +87,7 @@ namespace Proyecto1_KatherineMurillo.Controllers
                 });
             }
 
-            
+
             return RedirectToAction("ListadoMantenimiento", "RegistroMantenimiento");
         }
 
