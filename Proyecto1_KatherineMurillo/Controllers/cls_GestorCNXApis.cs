@@ -44,20 +44,17 @@ namespace Proyecto1_KatherineMurillo.Controllers
         }
         public async Task<bool> AlmacenarEmployee(cls_Empleados Obj_Entidad)
         {
-            string _sRutaAPI = @"api/Empleados/ConsultaEmployee";
+            string _sRutaAPI = @"api/Empleados/AlmacenaEmployee";
             HttpResponseMessage resultadoconsumo = await hcCNXApi.PostAsJsonAsync(_sRutaAPI, Obj_Entidad);
             return resultadoconsumo.IsSuccessStatusCode;
         }
         public async Task<bool> EliminarEmployee(cls_Empleados Obj_Entidad)
         {
-            string _sRutaAPI = @"api/Empleados/ConsultaEmployee";
+            string _sRutaAPI = @"api/Empleados/EliminaEmployee";
             hcCNXApi.DefaultRequestHeaders.Add("_iCedula", Obj_Entidad.iCedula.ToString());
             HttpResponseMessage resultadoconsumo = await hcCNXApi.DeleteAsync(_sRutaAPI);
             return resultadoconsumo.IsSuccessStatusCode;
         }
-
-
-
         #endregion
 
         #region INVENT

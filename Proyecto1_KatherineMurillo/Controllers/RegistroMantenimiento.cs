@@ -52,7 +52,17 @@ namespace Proyecto1_KatherineMurillo.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertMantenimiento(cls_Mantenimiento P_Entidad) //Método para insertar 
         {
+            if (!ModelState.IsValid) //Valida los atributos requeridos
+            {
+                return View("AbrirCrearMantenimiento", P_Entidad); //Devuelve la vista con errores
+            }
             cls_GestorCNXApis Obj_GestorCNX = new cls_GestorCNXApis(); //INSTANCIO OBJ DE LA CLASE GESTORCONEX
+            List<cls_Mantenimiento> lstMantenimiento = await Obj_GestorCNX.ListarMaintenance();
+            if (lstMantenimiento.Any(item => item.idMantenimiento == P_Entidad.idMantenimiento))
+            {
+                ModelState.AddModelError("idMantenimiento", "El ID del mantenimiento ya existe");
+                return View("AbrirCrearMantenimiento", P_Entidad); // Devuelve a la vista con el error
+            }
             await Obj_GestorCNX.AlmacenarMaintenance(P_Entidad);
 
             DateTime hoy = DateTime.Today;

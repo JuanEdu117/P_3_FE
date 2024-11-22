@@ -52,7 +52,18 @@ namespace Proyecto1_KatherineMurillo.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertEmpleados(cls_Empleados P_Entidad) //Método para insertar 
         {
+            if (!ModelState.IsValid) // Valida los atributos requeridos
+            {
+                return View("AbrirCrearEmpleado", P_Entidad); // Devuelve a la vista con errores
+            }
             cls_GestorCNXApis Obj_Gestor = new cls_GestorCNXApis();
+            //Verifica si el ID ya existe en la lista de inventarios
+            List<cls_Empleados> lstEmpleados = await Obj_Gestor.ListarEmployee();
+            if (lstEmpleados.Any(item => item.iCedula == P_Entidad.iCedula))
+            {
+                ModelState.AddModelError("iCedula", "La cédula ya existe");
+                return View("AbrirCrearEmpleado", P_Entidad); // Devuelve a la vista con el error
+            }
             await Obj_Gestor.AlmacenarEmployee(P_Entidad);
             return RedirectToAction("ListadoEmpleados", "RegistroEmpleados");
         }

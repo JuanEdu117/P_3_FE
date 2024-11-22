@@ -52,7 +52,18 @@ namespace Proyecto1_KatherineMurillo.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertInventario(cls_Inventario P_Entidad) //Método para insertar 
         {
+            if (!ModelState.IsValid) //Valida los atributos requeridos
+            {
+                return View("AbrirCrearInventario", P_Entidad); //Devuelve la vista con errores
+            }
             cls_GestorCNXApis Obj_Gestor = new cls_GestorCNXApis(); //INSTANCIO OBJ DE LA CLASE GESTORCONEX
+            //Verifica si el ID ya existe en la lista de inventarios
+            List<cls_Inventario> lstInventario = await Obj_Gestor.ListarInvent();
+            if (lstInventario.Any(item => item.idInventario == P_Entidad.idInventario))
+            {
+                ModelState.AddModelError("idInventario", "El ID del inventario ya existe");
+                return View("AbrirCrearInventario", P_Entidad); // Devuelve a la vista con el error
+            }
             await Obj_Gestor.AlmacenarInvent(P_Entidad);
             return RedirectToAction("ListadoInventario", "RegistroInventario");
         }
