@@ -52,7 +52,17 @@ namespace Proyecto1_KatherineMurillo.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertClientes(cls_Clientes P_Entidad) //Método para insertar 
         {
+            if (!ModelState.IsValid) //Valida los atributos requeridos
+            {
+                return View("AbrirCrearClientes", P_Entidad); //Devuelve la vista con errores
+            }
             cls_GestorCNXApis Obj_Gestor = new cls_GestorCNXApis(); //INSTANCIO OBJ DE LA CLASE GESTORCONEX
+            List<cls_Clientes> lstClientes = await Obj_Gestor.ListarClient();
+            if (lstClientes.Any(item => item.identificacion == P_Entidad.identificacion))
+            {
+                ModelState.AddModelError("identificacion", "La identificación ya existe");
+                return View("AbrirCrearClientes", P_Entidad); // Devuelve a la vista con el error
+            }
             await Obj_Gestor.AlmacenarClient(P_Entidad);
             return RedirectToAction("ListadoClientes", "RegistroClientes");
         }

@@ -6,10 +6,6 @@
 
 <h1>Listado Reportes</h1>
 
-<p>
-    <a asp-action="AbrirCrearReportes" asp-controller="RegistroReportes">Crear Nuevo</a>
-</p>
-
 <form asp-action="FiltrarReportes" asp-controller="RegistroReportes" method="get">
     @* ASOCIO LA ACCION DEL CONTROLLLER ASP-ACTION Y LE ASIGNO EL CONTROLLER ASP-CONTROLLER *@
     <div>
@@ -19,6 +15,7 @@
         <button type="submit" class="button btn-outline-primary font-weight-bold"> <span class="spinner-border spinner-border-sm"></span>Filtrar</button>
     </div>
 </form>
+
 <hr />
 <table class="table table-hover">
     <thead class="table-success">
@@ -73,8 +70,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.motivo)
             </td>
-                <td class="btn-group">
-                    @Html.ActionLink("Modificar", "AbrirModificarReportes", new { _iId_Reportes = item.id_Mantenimiento }, new { @class = "btn btn-warning" }) |
+                <td class="btn-group">                   
                     @Html.ActionLink("Eliminar", "AbrirEliminarReportes", new { _iId_Inventario = item.id_Mantenimiento }, new { @class = "btn btn-danger" }) |
                 </td>
         </tr>
